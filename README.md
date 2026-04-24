@@ -27,7 +27,6 @@
 
 - **Production (Netlify)**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
-- **Deploy to Netlify**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract**: `PLACEHOLDER_CONTRACT_ID` (Will be updated after deployment)
 - **Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet/contract/PLACEHOLDER_CONTRACT_ID)
 
