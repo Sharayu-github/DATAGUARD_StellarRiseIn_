@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useWallet } from '../context/WalletContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
   const { isWalletConnected, publicKey, connectWallet, disconnectWallet, isTestMode } = useWallet();
+  const { user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -12,103 +15,100 @@ const Navbar: React.FC = () => {
     return `${address.slice(0, 4)}...${address.slice(-4)}`;
   };
 
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
+
   return (
-    <nav className="bg-white shadow-lg relative z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🛡️</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900">DataGuard</span>
-            </Link>
-          </div>
-
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/') 
-                  ? 'text-blue-600 bg-blue-50' 
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/upload"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/upload') 
-                  ? 'text-blue-600 bg-blue-50' 
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-              }`}
-            >
-              Upload Data
-            </Link>
-            <Link
-              to="/verify"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/verify') 
-                  ? 'text-blue-600 bg-blue-50' 
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-              }`}
-            >
-              Verify Data
-            </Link>
-            <Link
-              to="/records"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/records') 
-                  ? 'text-blue-600 bg-blue-50' 
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-              }`}
-            >
-              My Records
-            </Link>
-            <Link
-              to="/dashboard"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/dashboard') 
-                  ? 'text-blue-600 bg-blue-50' 
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-              }`}
-            >
-              Dashboard
-            </Link>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            {isTestMode && (
-              <div className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium">
-                ⚠️ TEST MODE
-              </div>
-            )}
-            
-            {isWalletConnected ? (
-              <div className="flex items-center space-x-3">
-                <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                  {formatAddress(publicKey!)}
-                </div>
-                <button
-                  onClick={disconnectWallet}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                >
-                  Disconnect
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={connectWallet}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-              >
-                Connect Wallet
-              </button>
-            )}
-          </div>
-        </div>
+    <aside className="sidebar">
+      <div>
+        <h2>🛡️ DataGuard</h2>
+        
+        <nav>
+          <Link 
+            to="/dashboard" 
+            className={`sidebar button ${isActive('/dashboard') ? 'active' : ''}`}
+            style={{ textDecoration: 'none' }}
+          >
+            🏠 Dashboard
+          </Link>
+          <Link 
+            to="/upload" 
+            className={`sidebar button ${isActive('/upload') ? 'active' : ''}`}
+            style={{ textDecoration: 'none' }}
+          >
+            📤 Upload Data
+          </Link>
+          <Link 
+            to="/verify" 
+            className={`sidebar button ${isActive('/verify') ? 'active' : ''}`}
+            style={{ textDecoration: 'none' }}
+          >
+            ✅ Verify Data
+          </Link>
+          <Link 
+            to="/records" 
+            className={`sidebar button ${isActive('/records') ? 'active' : ''}`}
+            style={{ textDecoration: 'none' }}
+          >
+            📑 My Records
+          </Link>
+        </nav>
       </div>
-    </nav>
+
+      <div className="flex flex-col gap-4 mt-auto">
+        {/* User Info */}
+        {user && (
+          <div className="card p-3">
+            <div className="text-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <span className="text-lg">👤</span>
+              </div>
+              <p className="text-sm font-medium text-gray-900">{user.firstName} {user.lastName}</p>
+              <p className="text-xs text-gray-500">@{user.username}</p>
+            </div>
+          </div>
+        )}
+
+        {isTestMode && (
+          <div className="status-indicator status-warning text-center">
+            ⚠️ Test Mode
+          </div>
+        )}
+        
+        {isWalletConnected ? (
+          <div className="flex flex-col gap-2">
+            <div className="wallet-address-box text-center">
+              <div className="wallet-address-row justify-center">
+                <span className="wallet-address-text">{formatAddress(publicKey!)}</span>
+              </div>
+            </div>
+            <button
+              onClick={disconnectWallet}
+              className="btn-secondary text-sm w-full"
+            >
+              Disconnect Wallet
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={connectWallet}
+            className="btn-primary w-full"
+          >
+            Connect Wallet
+          </button>
+        )}
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="btn-secondary w-full text-sm"
+        >
+          🚪 Logout
+        </button>
+      </div>
+    </aside>
   );
 };
 

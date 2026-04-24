@@ -4,16 +4,19 @@
 
 ## 🌐 Live Demo
 
-- **Production**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
-- **GitHub**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
+- **Production (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
+- **Backup (Vercel)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract**: `PLACEHOLDER_CONTRACT_ID` (Will be updated after deployment)
 - **Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet/contract/PLACEHOLDER_CONTRACT_ID)
 
 ## 🔗 Quick Links
 
 ### Application
-- **Live Demo**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **Live Demo (Primary)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
+- **Live Demo (Backup)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
+- **Netlify Dashboard**: [Netlify Deploy](https://app.netlify.com/sites/dataguard-stellar)
 - **Vercel Dashboard**: [Vercel Project](https://vercel.com/dashboard)
 
 ### Smart Contract
@@ -48,6 +51,14 @@
 - 🛡️ **Emergency Controls**: Admin functions for contract management and security
 
 ### Technical Features
+- 🔐 **User Authentication**: Secure JWT-based authentication with MongoDB storage
+- 👤 **User Management**: Complete user profiles with preferences and settings
+- 🔗 **Wallet Integration**: Link Stellar wallets to user accounts for enhanced security
+- 📱 **Responsive Design**: VitalX-inspired UI that works on all devices
+- 🚀 **React + TypeScript**: Modern frontend with type safety
+- 🗄️ **MongoDB Database**: Secure user data storage with encryption
+- 🛡️ **Security Features**: Rate limiting, input validation, and secure password hashing
+- 🔄 **Real-time Updates**: Live dashboard updates and notifications
 - 🎨 **Professional UI**: Modern, responsive design optimized for data protection workflows
 - 🚀 **Fast Performance**: Lightning-fast verification with minimal blockchain fees
 - 🔍 **Advanced Search**: Find records by ID, type, category, or metadata
@@ -172,6 +183,39 @@ npm run dev
 4. Monitor upload trends
 5. Track platform-wide statistics
 
+## 🔐 Authentication System
+
+DataGuard includes a comprehensive user authentication system with MongoDB integration:
+
+### User Registration & Login
+1. **Sign Up**: Create account with username, email, and secure password
+2. **Login**: Access your account with email/username and password
+3. **Protected Routes**: Dashboard, Upload, and Records require authentication
+4. **Session Management**: JWT tokens with automatic refresh
+
+### User Features
+- **Profile Management**: Update personal information and preferences
+- **Wallet Linking**: Connect Stellar wallet to user account
+- **Security**: Password hashing, rate limiting, and account lockout protection
+- **Preferences**: Customize notifications and theme settings
+
+### Backend API
+- **MongoDB Database**: Secure user data storage
+- **Express.js Server**: RESTful API with comprehensive validation
+- **JWT Authentication**: Secure token-based authentication
+- **Rate Limiting**: Protection against brute force attacks
+
+### Getting Started with Authentication
+1. **Start Backend Server**:
+   ```bash
+   cd server
+   npm install
+   npm run dev
+   ```
+2. **MongoDB Setup**: Ensure MongoDB is running locally
+3. **Create Account**: Use the signup page to create your account
+4. **Login**: Access protected features with your credentials
+
 ## 🏗️ Project Structure
 
 ```
@@ -180,16 +224,34 @@ dataguard/
 │   ├── components/
 │   │   ├── Navbar.tsx           # Navigation with wallet connection
 │   │   ├── AnimatedBackground.tsx # Security-themed background
-│   │   └── Toast.tsx            # Notification system
+│   │   ├── Toast.tsx            # Notification system
+│   │   └── ProtectedRoute.tsx   # Authentication guard
 │   ├── pages/
 │   │   ├── LandingPage.tsx      # Homepage with features
+│   │   ├── LoginPage.tsx        # User login interface
+│   │   ├── SignupPage.tsx       # User registration
 │   │   ├── UploadPage.tsx       # Data upload interface
 │   │   ├── VerifyPage.tsx       # Data verification
 │   │   ├── RecordsPage.tsx      # Browse all records
 │   │   └── Dashboard.tsx        # Analytics dashboard
 │   ├── context/
 │   │   ├── WalletContext.tsx    # Wallet state management
+│   │   ├── AuthContext.tsx      # Authentication state
 │   │   └── ToastContext.tsx     # Notification context
+│   ├── services/
+│   │   ├── authService.ts       # Authentication API calls
+│   │   ├── contractService.ts   # Smart contract interactions
+│   │   └── hashService.ts       # File hashing utilities
+├── server/                       # Backend API
+│   ├── models/
+│   │   └── User.js              # MongoDB user model
+│   ├── routes/
+│   │   ├── auth.js              # Authentication routes
+│   │   └── users.js             # User management routes
+│   ├── middleware/
+│   │   └── auth.js              # JWT authentication middleware
+│   ├── server.js                # Express server setup
+│   └── package.json             # Backend dependencies
 │   ├── services/
 │   │   ├── contractService.ts   # Smart contract operations
 │   │   └── hashService.ts       # SHA-256 file hashing
@@ -348,6 +410,184 @@ npm run build
 # (Netlify, GitHub Pages, AWS S3, etc.)
 ```
 
+## 🚀 Deployment Guide
+
+### Netlify Deployment (Primary)
+
+#### Automatic Deployment via GitHub
+1. **Fork/Clone Repository**:
+   ```bash
+   git clone https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_.git
+   cd DATAGUARD_StellarRiseIn_/dataguard
+   ```
+
+2. **Connect to Netlify**:
+   - Go to [Netlify](https://app.netlify.com)
+   - Click "New site from Git"
+   - Connect your GitHub repository
+   - Select the `dataguard` folder as root directory
+
+3. **Build Settings**:
+   ```
+   Build command: npm run build
+   Publish directory: build
+   Node version: 18
+   ```
+
+4. **Environment Variables**:
+   ```
+   REACT_APP_NAME=DataGuard
+   REACT_APP_STELLAR_NETWORK=testnet
+   REACT_APP_HORIZON_URL=https://horizon-testnet.stellar.org
+   REACT_APP_CONTRACT_ID=PLACEHOLDER_CONTRACT_ID
+   REACT_APP_FREIGHTER_ENABLED=true
+   REACT_APP_API_URL=https://your-backend-api.herokuapp.com/api
+   REACT_APP_ENVIRONMENT=production
+   ```
+
+5. **Deploy**: Netlify will automatically build and deploy
+
+#### Manual Netlify Deployment
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Build the project
+npm run build
+
+# Deploy to Netlify
+netlify deploy --prod --dir=build
+```
+
+### Vercel Deployment (Backup)
+
+#### Automatic Deployment
+1. **Connect Repository**:
+   - Go to [Vercel](https://vercel.com)
+   - Import your GitHub repository
+   - Select the `dataguard` folder
+
+2. **Build Configuration**:
+   ```json
+   {
+     "buildCommand": "npm run build",
+     "outputDirectory": "build",
+     "installCommand": "npm install"
+   }
+   ```
+
+3. **Environment Variables**: Same as Netlify configuration above
+
+#### Manual Vercel Deployment
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Build and deploy
+npm run build
+vercel --prod
+```
+
+### Backend Deployment (Heroku)
+
+1. **Prepare Backend**:
+   ```bash
+   cd server
+   # Create Procfile
+   echo "web: node server.js" > Procfile
+   ```
+
+2. **Deploy to Heroku**:
+   ```bash
+   # Install Heroku CLI
+   heroku create dataguard-api
+   
+   # Set environment variables
+   heroku config:set NODE_ENV=production
+   heroku config:set MONGODB_URI=your_mongodb_connection_string
+   heroku config:set JWT_SECRET=your_jwt_secret
+   heroku config:set CLIENT_URL=https://dataguard-stellar.netlify.app
+   
+   # Deploy
+   git push heroku main
+   ```
+
+### Environment Configuration
+
+#### Production Environment Variables
+```env
+# Frontend (.env.production)
+REACT_APP_NAME=DataGuard
+REACT_APP_STELLAR_NETWORK=testnet
+REACT_APP_HORIZON_URL=https://horizon-testnet.stellar.org
+REACT_APP_CONTRACT_ID=PLACEHOLDER_CONTRACT_ID
+REACT_APP_FREIGHTER_ENABLED=true
+REACT_APP_API_URL=https://dataguard-api.herokuapp.com/api
+REACT_APP_ENVIRONMENT=production
+GENERATE_SOURCEMAP=false
+
+# Backend (Heroku Config Vars)
+NODE_ENV=production
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dataguard
+JWT_SECRET=your-super-secret-jwt-key-for-production
+JWT_EXPIRE=7d
+PORT=5000
+CLIENT_URL=https://dataguard-stellar.netlify.app
+```
+
+### Deployment Checklist
+
+#### Pre-Deployment
+- [ ] All tests passing (`npm test`)
+- [ ] Build successful (`npm run build`)
+- [ ] Environment variables configured
+- [ ] Security vulnerabilities addressed (`npm audit`)
+- [ ] Smart contracts deployed (if applicable)
+- [ ] Database configured and accessible
+
+#### Post-Deployment
+- [ ] Application loads correctly
+- [ ] Authentication system working
+- [ ] Wallet connection functional
+- [ ] API endpoints responding
+- [ ] SSL certificate active
+- [ ] Performance monitoring setup
+
+### Monitoring and Maintenance
+
+#### Netlify Monitoring
+- **Build Logs**: Check build status and errors
+- **Analytics**: Monitor traffic and performance
+- **Forms**: Handle contact form submissions
+- **Functions**: Monitor serverless function performance
+
+#### Performance Optimization
+- **CDN**: Automatic global content delivery
+- **Compression**: Gzip compression enabled
+- **Caching**: Static asset caching configured
+- **Image Optimization**: Automatic image optimization
+
+### Troubleshooting Deployment
+
+#### Common Issues
+1. **Build Failures**:
+   ```bash
+   # Clear cache and rebuild
+   rm -rf node_modules package-lock.json
+   npm install
+   npm run build
+   ```
+
+2. **Environment Variable Issues**:
+   - Verify all required variables are set
+   - Check variable names (case-sensitive)
+   - Restart deployment after changes
+
+3. **API Connection Issues**:
+   - Verify backend URL is correct
+   - Check CORS configuration
+   - Ensure backend is deployed and running
+
 ## 🐛 Troubleshooting
 
 ### Wallet Connection Issues
@@ -444,9 +684,11 @@ For issues, questions, or feature requests:
 
 ## 🚀 Live Links
 
-- **Production App**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **Production App (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
+- **Backup App (Vercel)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet)
+- **Netlify Dashboard**: [Project Dashboard](https://app.netlify.com/sites/dataguard-stellar)
 - **Vercel Dashboard**: [Project Dashboard](https://vercel.com/dashboard)
 
 ---

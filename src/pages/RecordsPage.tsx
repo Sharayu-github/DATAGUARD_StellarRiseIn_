@@ -90,8 +90,8 @@ const RecordsPage: React.FC = () => {
 
   if (!isWalletConnected) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="text-center">
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="card text-center max-w-md">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-2xl">🔒</span>
           </div>
@@ -103,182 +103,181 @@ const RecordsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Data Records</h1>
+    <div>
+      {/* Header */}
+      <div className="header">
+        <h1>
+          <span>My Records</span> 📑
+        </h1>
+      </div>
+
+      {/* Controls */}
+      <div className="card mb-8">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          {/* View Mode Toggle */}
+          <div className="flex bg-gray-100 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('my')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'my'
+                  ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              My Records ({records.filter(r => r.owner === publicKey).length})
+            </button>
+            <button
+              onClick={() => setViewMode('all')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'all'
+                  ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              All Records ({records.length})
+            </button>
+          </div>
+
+          {/* Search and Filter */}
+          <div className="flex gap-4 flex-1 max-w-md">
+            <input
+              type="text"
+              placeholder="Search records..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="form-input flex-1"
+            />
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="form-select"
+            >
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category === 'all' ? 'All Categories' : category.charAt(0).toUpperCase() + category.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Records Grid */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="loading-spinner"></div>
+        </div>
+      ) : filteredRecords.length === 0 ? (
+        <div className="card text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl">📭</span>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No Records Found</h3>
           <p className="text-gray-600">
-            Browse and manage your protected data records
+            {viewMode === 'my' 
+              ? "You haven't uploaded any data yet." 
+              : "No records match your search criteria."
+            }
           </p>
         </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {filteredRecords.map((record) => (
+            <div key={record.recordId} className="card">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">{getCategoryIcon(record.category)}</span>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 truncate">{record.title}</h3>
+                    <p className="text-xs text-gray-500 capitalize">{record.category}</p>
+                  </div>
+                </div>
+                {record.owner === publicKey && (
+                  <span className="status-indicator status-success">
+                    Mine
+                  </span>
+                )}
+              </div>
 
-        {/* Controls */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* View Mode Toggle */}
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('my')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'my'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                My Records ({records.filter(r => r.owner === publicKey).length})
-              </button>
-              <button
-                onClick={() => setViewMode('all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                All Records ({records.length})
-              </button>
+              <div className="space-y-2 mb-4">
+                <p className="text-sm text-gray-600 line-clamp-2">{record.description || 'No description'}</p>
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>{record.fileName}</span>
+                  <span>{formatFileSize(record.fileSize)}</span>
+                </div>
+                <p className="text-xs text-gray-500">
+                  {new Date(record.timestamp).toLocaleDateString()}
+                </p>
+              </div>
+
+              {record.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {record.tags.slice(0, 3).map((tag, index) => (
+                    <span key={index} className="status-indicator status-info text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                  {record.tags.length > 3 && (
+                    <span className="text-xs text-gray-500">+{record.tags.length - 3} more</span>
+                  )}
+                </div>
+              )}
+
+              <div className="border-t pt-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-500">Record ID:</span>
+                  <button
+                    onClick={() => copyRecordId(record.recordId)}
+                    className="text-xs text-blue-600 hover:text-blue-800 font-mono bg-gray-50 px-2 py-1 rounded hover:bg-gray-100 transition-colors"
+                    title="Click to copy"
+                  >
+                    {record.recordId.slice(0, 12)}...
+                  </button>
+                </div>
+                {record.blockchainTxId && (
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs text-gray-500">Blockchain TX:</span>
+                    <span className="text-xs text-gray-400 font-mono">
+                      {record.blockchainTxId.slice(0, 12)}...
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
+          ))}
+        </div>
+      )}
 
-            {/* Search and Filter */}
-            <div className="flex gap-4 flex-1 max-w-md">
-              <input
-                type="text"
-                placeholder="Search records..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                {categories.map(category => (
-                  <option key={category} value={category}>
-                    {category === 'all' ? 'All Categories' : category.charAt(0).toUpperCase() + category.slice(1)}
-                  </option>
-                ))}
-              </select>
+      {/* Stats */}
+      {!loading && filteredRecords.length > 0 && (
+        <div className="card mt-8">
+          <h3>Records Statistics</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold text-gradient">{filteredRecords.length}</div>
+              <div className="text-sm text-gray-600">Records Shown</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-gradient">
+                {filteredRecords.filter(r => r.owner === publicKey).length}
+              </div>
+              <div className="text-sm text-gray-600">Your Records</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-gradient">
+                {categories.length - 1}
+              </div>
+              <div className="text-sm text-gray-600">Categories</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-gradient">
+                {formatFileSize(filteredRecords.reduce((sum, r) => sum + r.fileSize, 0))}
+              </div>
+              <div className="text-sm text-gray-600">Total Size</div>
             </div>
           </div>
         </div>
-
-        {/* Records Grid */}
-        {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        ) : filteredRecords.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">📭</span>
-            </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Records Found</h3>
-            <p className="text-gray-600">
-              {viewMode === 'my' 
-                ? "You haven't uploaded any data yet." 
-                : "No records match your search criteria."
-              }
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredRecords.map((record) => (
-              <div key={record.recordId} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl">{getCategoryIcon(record.category)}</span>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 truncate">{record.title}</h3>
-                      <p className="text-xs text-gray-500">{record.category}</p>
-                    </div>
-                  </div>
-                  {record.owner === publicKey && (
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-                      Mine
-                    </span>
-                  )}
-                </div>
-
-                <div className="space-y-2 mb-4">
-                  <p className="text-sm text-gray-600 line-clamp-2">{record.description || 'No description'}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span>{record.fileName}</span>
-                    <span>{formatFileSize(record.fileSize)}</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    {new Date(record.timestamp).toLocaleDateString()}
-                  </p>
-                </div>
-
-                {record.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {record.tags.slice(0, 3).map((tag, index) => (
-                      <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                        {tag}
-                      </span>
-                    ))}
-                    {record.tags.length > 3 && (
-                      <span className="text-xs text-gray-500">+{record.tags.length - 3} more</span>
-                    )}
-                  </div>
-                )}
-
-                <div className="border-t pt-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">Record ID:</span>
-                    <button
-                      onClick={() => copyRecordId(record.recordId)}
-                      className="text-xs text-blue-600 hover:text-blue-800 font-mono bg-gray-50 px-2 py-1 rounded"
-                      title="Click to copy"
-                    >
-                      {record.recordId.slice(0, 12)}...
-                    </button>
-                  </div>
-                  {record.blockchainTxId && (
-                    <div className="flex items-center justify-between mt-1">
-                      <span className="text-xs text-gray-500">Blockchain TX:</span>
-                      <span className="text-xs text-gray-400 font-mono">
-                        {record.blockchainTxId.slice(0, 12)}...
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Stats */}
-        {!loading && filteredRecords.length > 0 && (
-          <div className="mt-8 bg-gray-50 rounded-lg p-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-bold text-blue-600">{filteredRecords.length}</div>
-                <div className="text-sm text-gray-600">Records Shown</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-green-600">
-                  {filteredRecords.filter(r => r.owner === publicKey).length}
-                </div>
-                <div className="text-sm text-gray-600">Your Records</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-purple-600">
-                  {categories.length - 1}
-                </div>
-                <div className="text-sm text-gray-600">Categories</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-orange-600">
-                  {formatFileSize(filteredRecords.reduce((sum, r) => sum + r.fileSize, 0))}
-                </div>
-                <div className="text-sm text-gray-600">Total Size</div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };

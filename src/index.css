@@ -1,17 +1,1052 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* VitalX Design System Variables */
+:root {
+  --primary-gradient: linear-gradient(90deg, #3b82f6, #22c55e);
+  --secondary-gradient: linear-gradient(90deg, #2563eb, #16a34a);
+  --success-gradient: linear-gradient(90deg, #22c55e, #16a34a);
+  --danger-gradient: linear-gradient(90deg, #ef4444, #dc2626);
+  --warning-gradient: linear-gradient(90deg, #f59e0b, #d97706);
+  --info-gradient: linear-gradient(90deg, #3b82f6, #2563eb);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(229, 233, 242, 1);
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --shadow-dark: 0 20px 50px rgba(10, 20, 30, 0.25);
+}
+
+/* Reset and Base Styles */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f7f9fc;
+  color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* VitalX Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* VitalX Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background: #ffffff;
+  border-right: 1px solid #e5e9f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  color: #2563eb;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #555;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.sidebar .logout-btn {
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+.sidebar .logout-btn:hover {
+  transform: scale(1.03);
+  background: var(--secondary-gradient);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 40px 50px;
+  background-color: #f7f9fc;
+  margin-left: 250px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* VitalX Header Styles */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.header h1 span {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* VitalX Card Styles */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: var(--shadow-light);
+  padding: 30px;
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.card h3 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card.large-card {
+  padding: 40px;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+/* Grid Layouts */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .grid.md\\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .grid.md\\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .grid.md\\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid.lg\\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .grid.lg\\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* VitalX Button Styles */
+.btn-primary {
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: scale(1.03);
+  background: var(--secondary-gradient);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+  padding: 10px 22px;
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.btn-success {
+  background: var(--success-gradient);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.btn-success:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+}
+
+.btn-danger {
+  background: var(--danger-gradient);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+/* VitalX Form Elements */
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  color: #374151;
+  margin-bottom: 16px;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* VitalX Navigation */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(229, 233, 242, 0.8);
+  box-shadow: var(--shadow-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-link {
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #6b7280;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-link:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+/* Top Navigation Wallet Styles */
+.navbar .wallet-address-box {
+  background: var(--primary-gradient);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 120px;
+}
+
+.navbar .wallet-address-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.navbar .wallet-address-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+}
+
+.navbar .btn-primary,
+.navbar .btn-secondary {
+  padding: 8px 16px;
+  font-size: 14px;
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.navbar .btn-secondary {
+  background: transparent;
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.navbar .btn-secondary:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Navigation Button Container */
+.navbar .flex.items-center.space-x-3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  .navbar .flex.items-center.space-x-3 {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  
+  .navbar .wallet-address-box {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  
+  .navbar .btn-primary,
+  .navbar .btn-secondary {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar .flex.items-center.space-x-3 {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  
+  .navbar .wallet-address-box {
+    order: 1;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar .btn-primary {
+    order: 2;
+    flex: 1;
+    min-width: 80px;
+  }
+  
+  .navbar .btn-secondary {
+    order: 3;
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+/* VitalX Wallet Styles */
+.wallet-wrapper {
+  position: relative;
+}
+
+.wallet-address-box {
+  position: relative;
+  background: var(--primary-gradient);
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-address-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.wallet-address-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.wallet-address-row.justify-center {
+  justify-content: center;
+}
+
+.copy-icon {
+  cursor: pointer;
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+.copy-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.wallet-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  min-width: 180px;
+  padding: 8px 0;
+  box-shadow: var(--shadow-medium);
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.wallet-dropdown button {
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #374151;
+}
+
+.wallet-dropdown button:hover {
+  background: #f3f4f6;
+}
+
+/* VitalX Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* VitalX File Upload */
+.file-upload-area {
+  background: rgba(59, 130, 246, 0.05);
+  border: 2px dashed rgba(59, 130, 246, 0.3);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.file-upload-area:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.file-upload-area.dragover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.15);
+  transform: scale(1.02);
+}
+
+/* VitalX Tables */
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+}
+
+.records-table th {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.records-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #374151;
+  font-size: 14px;
+}
+
+.records-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.records-table tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* VitalX Progress Bars */
+.progress-bar {
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+  position: relative;
+}
+
+.progress-fill {
+  background: var(--primary-gradient);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* VitalX Loading States */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  border-top-color: #3b82f6;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* VitalX Text Styles */
+.text-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* VitalX Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+  .sidebar nav {
+    flex-direction: row;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .sidebar button {
+    white-space: nowrap;
+    min-width: auto;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .card.large-card {
+    padding: 24px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .landing-btn-primary,
+  .landing-btn-secondary {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .step-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero h1 {
+    font-size: 3rem;
+  }
+  
+  .landing-hero p {
+    font-size: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+/* Landing Page Specific Styles */
+.landing-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.landing-hero .max-w-6xl {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.landing-section {
+  padding: 5rem 2rem;
+}
+
+.landing-section.white {
+  background: white;
+}
+
+.landing-section.gray {
+  background: #f8fafc;
+}
+
+.landing-section.dark {
+  background: #1f2937;
+  color: white;
+}
+
+/* Button Container Centering */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  .button-container {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+/* Button Styles for Landing */
+.landing-btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.landing-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.landing-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.landing-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  color: white;
+  text-decoration: none;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-card {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step-card {
+  text-align: center;
+}
+
+.step-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-gradient);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: white;
+  position: relative;
+}
+
+.step-number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: white;
+  color: #3b82f6;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-light);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+}
+
+/* Content Centering */
+.content-center {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Centering */
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Button spacing improvements */
+.btn-primary + .btn-primary,
+.btn-primary + .btn-secondary,
+.btn-secondary + .btn-primary {
+  margin-left: 0.75rem;
+}
+
+/* Navigation button improvements */
+.navbar .flex.items-center.space-x-3 > * + * {
+  margin-left: 0.75rem;
+}
+
+/* Landing page button container improvements */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button-container .landing-btn-primary,
+.button-container .landing-btn-secondary {
+  margin: 0;
+}
+
+/* Responsive navigation */
+@media (max-width: 640px) {
+  .navbar .flex.items-center.space-x-3 {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .navbar .flex.items-center.space-x-3 > * {
+    margin-left: 0;
+  }
+}
+
+/* Loading spinner for authentication */
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

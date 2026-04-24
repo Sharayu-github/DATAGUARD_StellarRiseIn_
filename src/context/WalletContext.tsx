@@ -2,9 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { 
   isConnected, 
   getAddress, 
-  signTransaction,
-  isAllowed,
-  setAllowed 
+  signTransaction
 } from '@stellar/freighter-api';
 
 interface WalletContextType {
