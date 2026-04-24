@@ -2,6 +2,27 @@
 
 🛡️ **DataGuard** is a cutting-edge data protection platform built on Stellar blockchain with Soroban smart contracts and Freighter wallet integration. It ensures your sensitive data is tamper-proof, privacy-protected, and instantly verifiable through cryptographic hashing and immutable blockchain storage.
 
+## 🚀 **LIVE APPLICATION**
+
+### 🌐 **Access the Live Application**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app)
+
+**✅ DEPLOYED & ACTIVE** | **🔒 HTTPS Secured** | **⚡ Global CDN** | **📱 Mobile Ready**
+
+---
+
+## 📋 Quick Navigation
+
+| Section | Description | Link |
+|---------|-------------|------|
+| 🚀 **LIVE APP** | **Access the deployed application** | **[https://stellardataguard.netlify.app](https://stellardataguard.netlify.app)** |
+| 🌟 Features | Core platform capabilities | [View Features](#-features) |
+| 🛠️ Tech Stack | Technologies used | [View Tech Stack](#️-tech-stack) |
+| 🚀 Quick Start | Setup instructions | [Get Started](#-quick-start) |
+| 📖 How to Use | User guide | [Usage Guide](#-how-to-use) |
+| 🚀 Deployment | Deployment information | [Deploy Guide](#-deployment) |
+
+---
+
 ## 🌐 Live Demo
 
 - **Production (Netlify)**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app) 🚀
@@ -700,6 +721,16 @@ For issues, questions, or feature requests:
 **Built with ❤️ for Data Security and Blockchain Innovation**
 
 ⭐ **If you find this project useful, please give it a star!**
+
+## 🚀 **TRY DATAGUARD NOW - LIVE APPLICATION**
+
+### 🌐 **LIVE DEPLOYMENT**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app)
+
+**🎯 Ready to secure your data with blockchain technology?**
+
+**👆 Click the link above to access the live application instantly!**
+
+---
 
 ## 🚀 Live Links
 
