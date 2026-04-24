@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@stellar/freighter-api": "^6.0.1",
     "@stellar/stellar-sdk": "^15.0.1",
     "@tailwindcss/forms": "^0.5.11",
@@ -30,11 +31,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start",
+    "dev": "craco start",
     "preview": "serve -s build",
     "contract:build": "cd contracts && cargo build --target wasm32-unknown-unknown --release",
     "contract:deploy": "cd contracts && chmod +x deploy.sh && ./deploy.sh",

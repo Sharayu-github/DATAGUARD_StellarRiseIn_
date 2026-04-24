@@ -1,5 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { isConnected, getPublicKey, signTransaction } from '@stellar/freighter-api';
+import { 
+  isConnected, 
+  getAddress, 
+  signTransaction,
+  isAllowed,
+  setAllowed 
+} from '@stellar/freighter-api';
 
 interface WalletContextType {
   isWalletConnected: boolean;
@@ -35,12 +41,16 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 
   const checkWalletConnection = async () => {
     try {
-      const connected = await isConnected();
-      if (connected) {
-        const key = await getPublicKey();
-        setPublicKey(key);
-        setIsWalletConnected(true);
-        setIsTestMode(false);
+      const connectionResult = await isConnected();
+      if (connectionResult.isConnected) {
+        const addressResult = await getAddress();
+        if (addressResult.address) {
+          setPublicKey(addressResult.address);
+          setIsWalletConnected(true);
+          setIsTestMode(false);
+        } else {
+          throw new Error('No address available');
+        }
       } else {
         // Enable test mode if Freighter is not available
         setIsTestMode(true);
@@ -57,12 +67,16 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 
   const connectWallet = async () => {
     try {
-      const connected = await isConnected();
-      if (connected) {
-        const key = await getPublicKey();
-        setPublicKey(key);
-        setIsWalletConnected(true);
-        setIsTestMode(false);
+      const connectionResult = await isConnected();
+      if (connectionResult.isConnected) {
+        const addressResult = await getAddress();
+        if (addressResult.address) {
+          setPublicKey(addressResult.address);
+          setIsWalletConnected(true);
+          setIsTestMode(false);
+        } else {
+          throw new Error('No address available');
+        }
       } else {
         throw new Error('Freighter wallet not found');
       }
@@ -88,12 +102,16 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     }
     
     try {
-      const signedXdr = await signTransaction(xdr, {
-        network: 'TESTNET',
+      const result = await signTransaction(xdr, {
         networkPassphrase: 'Test SDF Network ; September 2015',
-        accountToSign: publicKey!
+        address: publicKey!
       });
-      return signedXdr;
+      
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      
+      return result.signedTxXdr;
     } catch (error) {
       console.error('Failed to sign transaction:', error);
       throw error;

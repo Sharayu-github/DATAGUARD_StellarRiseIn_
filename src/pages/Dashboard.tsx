@@ -204,10 +204,10 @@ const Dashboard: React.FC = () => {
                       <div className="w-20 bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-blue-600 h-2 rounded-full" 
-                          style={{ width: `${(count / userRecords.length) * 100}%` }}
+                          style={{ width: `${((count as number) / userRecords.length) * 100}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-gray-600">{count}</span>
+                      <span className="text-sm text-gray-600">{count as number}</span>
                     </div>
                   </div>
                 ))}
@@ -249,7 +249,7 @@ const Dashboard: React.FC = () => {
                   <div key={category} className="bg-gray-50 rounded-lg p-3 text-center">
                     <div className="text-lg mb-1">{getCategoryIcon(category)}</div>
                     <div className="text-sm font-medium text-gray-900 capitalize">{category}</div>
-                    <div className="text-xs text-gray-600">{count} records</div>
+                    <div className="text-xs text-gray-600">{count as number} records</div>
                   </div>
                 ))}
               </div>
