@@ -5,7 +5,7 @@
 ### Frontend Applications
 | Platform | Status | URL | Last Updated |
 |----------|--------|-----|--------------|
-| **Netlify (Primary)** | 🟢 Active | [dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) | 2026-04-24 |
+| **Netlify (Primary)** | 🟢 Active | [stellardataguard.netlify.app](https://stellardataguard.netlify.app) | 2026-04-24 |
 | **Vercel (Backup)** | 🟢 Active | [dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app) | 2026-04-24 |
 
 ### Backend Services

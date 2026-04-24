@@ -79,7 +79,7 @@ The repository includes pre-configured files for Netlify:
 ## 🌐 Expected Deployment URL
 
 Your DataGuard application will be deployed at:
-- **Primary**: `https://dataguard-stellar.netlify.app`
+- **Primary**: `https://stellardataguard.netlify.app`
 - **Custom Domain**: Configure in Netlify Dashboard → Domain Settings
 
 ## 📋 Post-Deployment Checklist

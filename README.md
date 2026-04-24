@@ -4,18 +4,38 @@
 
 ## 🌐 Live Demo
 
-- **Production (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
+- **Production (Netlify)**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Deploy to Netlify**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract**: `PLACEHOLDER_CONTRACT_ID` (Will be updated after deployment)
 - **Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet/contract/PLACEHOLDER_CONTRACT_ID)
 
+## 📊 Deployment Status
+
+### ✅ **LIVE DEPLOYMENT SUCCESSFUL**
+- **Status**: 🟢 **DEPLOYED & ACTIVE**
+- **Deployment Date**: April 24, 2026
+- **Platform**: Netlify
+- **URL**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app)
+- **Build Status**: ✅ Successful
+- **SSL Certificate**: ✅ Active (Automatic HTTPS)
+- **CDN**: ✅ Global Edge Network
+- **Performance**: ✅ Optimized Build (129KB gzipped)
+
+### 🔧 **Deployment Details**
+- **Project ID**: `stellardataguard`
+- **Admin Dashboard**: [https://app.netlify.com/projects/stellardataguard](https://app.netlify.com/projects/stellardataguard)
+- **Build Command**: `npm run build`
+- **Deploy Directory**: `build/`
+- **Node Version**: 18.x
+- **Auto-Deploy**: ✅ Connected to GitHub (master branch)
+
 ## 🔗 Quick Links
 
 ### Application
-- **Live Demo**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
+- **Live Demo**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
-- **Netlify Dashboard**: [Netlify Deploy](https://app.netlify.com/sites/dataguard-stellar)
+- **Netlify Dashboard**: [Netlify Deploy](https://app.netlify.com/sites/stellardataguard)
 - **One-Click Deploy**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 
 ### Smart Contract
@@ -505,7 +525,7 @@ vercel --prod
    heroku config:set NODE_ENV=production
    heroku config:set MONGODB_URI=your_mongodb_connection_string
    heroku config:set JWT_SECRET=your_jwt_secret
-   heroku config:set CLIENT_URL=https://dataguard-stellar.netlify.app
+   heroku config:set CLIENT_URL=https://stellardataguard.netlify.app
    
    # Deploy
    git push heroku main
@@ -531,7 +551,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dataguard
 JWT_SECRET=your-super-secret-jwt-key-for-production
 JWT_EXPIRE=7d
 PORT=5000
-CLIENT_URL=https://dataguard-stellar.netlify.app
+CLIENT_URL=https://stellardataguard.netlify.app
 ```
 
 ### Deployment Checklist
@@ -683,7 +703,7 @@ For issues, questions, or feature requests:
 
 ## 🚀 Live Links
 
-- **Production App**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
+- **Production App**: [https://stellardataguard.netlify.app](https://stellardataguard.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet)
 - **Netlify Dashboard**: [Project Dashboard](https://app.netlify.com/sites/dataguard-stellar)

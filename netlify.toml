@@ -12,11 +12,11 @@
   status = 200
 
 [context.production.environment]
-  REACT_APP_API_URL = "https://dataguard-api.herokuapp.com/api"
+  REACT_APP_API_URL = "https://stellardataguard-api.herokuapp.com/api"
   REACT_APP_ENVIRONMENT = "production"
 
 [context.deploy-preview.environment]
-  REACT_APP_API_URL = "https://dataguard-api-staging.herokuapp.com/api"
+  REACT_APP_API_URL = "https://stellardataguard-api-staging.herokuapp.com/api"
   REACT_APP_ENVIRONMENT = "staging"
 
 [context.branch-deploy.environment]
