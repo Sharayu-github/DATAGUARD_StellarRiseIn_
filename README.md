@@ -4,20 +4,19 @@
 
 ## 🌐 Live Demo
 
-- **Production (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
-- **Backup (Vercel)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **Production (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
+- **Deploy to Netlify**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract**: `PLACEHOLDER_CONTRACT_ID` (Will be updated after deployment)
 - **Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet/contract/PLACEHOLDER_CONTRACT_ID)
 
 ## 🔗 Quick Links
 
 ### Application
-- **Live Demo (Primary)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
-- **Live Demo (Backup)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **Live Demo**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Netlify Dashboard**: [Netlify Deploy](https://app.netlify.com/sites/dataguard-stellar)
-- **Vercel Dashboard**: [Vercel Project](https://vercel.com/dashboard)
+- **One-Click Deploy**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 
 ### Smart Contract
 - **Contract ID**: `PLACEHOLDER_CONTRACT_ID`
@@ -684,12 +683,11 @@ For issues, questions, or feature requests:
 
 ## 🚀 Live Links
 
-- **Production App (Netlify)**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app)
-- **Backup App (Vercel)**: [https://dataguard-stellar.vercel.app](https://dataguard-stellar.vercel.app)
+- **Production App**: [https://dataguard-stellar.netlify.app](https://dataguard-stellar.netlify.app) 🚀
 - **GitHub Repository**: [https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_](https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 - **Smart Contract Explorer**: [Stellar Expert](https://stellar.expert/explorer/testnet)
 - **Netlify Dashboard**: [Project Dashboard](https://app.netlify.com/sites/dataguard-stellar)
-- **Vercel Dashboard**: [Project Dashboard](https://vercel.com/dashboard)
+- **Deploy Your Own**: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sharayu-github/DATAGUARD_StellarRiseIn_)
 
 ---
 
